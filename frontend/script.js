@@ -1,5 +1,11 @@
 import { ethers } from "./ethers-5.7.esm.min.js";
 
+connectButton = document.getElementById("connect");
+fundButton = document.getElementById("fund");
+
+connectButton.onclick = connectMetaMask;
+fundButton.onclick = fund;
+
 async function connectMetaMask() {
   if (typeof window.ethereum !== "undefined") {
     console.log("MetaMask is installed!");
