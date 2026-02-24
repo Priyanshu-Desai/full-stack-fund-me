@@ -14,3 +14,7 @@ async function connectMetaMask() {
     document.getElementById("connect").innerText = "Install MetaMask";
   }
 }
+
+async function fund() {
+  console.log(`Funding with ${ethAmount} ETH...`);
+}
