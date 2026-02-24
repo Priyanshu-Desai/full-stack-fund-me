@@ -1,3 +1,5 @@
+import { ethers } from "./ethers-5.7.esm.min.js";
+
 async function connectMetaMask() {
   if (typeof window.ethereum !== "undefined") {
     console.log("MetaMask is installed!");
@@ -15,6 +17,12 @@ async function connectMetaMask() {
   }
 }
 
-async function fund() {
+async function fund(ethAmount) {
   console.log(`Funding with ${ethAmount} ETH...`);
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractAddress = "0xYourContractAddress";
+  }
+  x``;
 }
