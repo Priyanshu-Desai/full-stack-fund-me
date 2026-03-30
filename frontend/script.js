@@ -3,9 +3,11 @@ import { abi, contractAddress } from "./constants.js";
 
 const connectButton = document.getElementById("connect");
 const fundButton = document.getElementById("fund");
+const balanceButton = document.getElementById("balance");
 
 connectButton.onclick = connectMetaMask;
 fundButton.onclick = fund;
+balanceButton.onclick = getBalance;
 
 async function connectMetaMask() {
   if (typeof window.ethereum !== "undefined") {
@@ -23,6 +25,21 @@ async function connectMetaMask() {
     connectButton.innerText = "Install MetaMask";
   }
 }
+
+async function getBalance() {
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const balance = await provider.getBalance(contractAddress);
+    console.log(
+      `Balance of contract at ${contractAddress}: ${ethers.utils.formatEther(balance)} ETH`,
+    );
+  } else {
+    console.log(
+      "MetaMask is not installed. Please install it to use this app.",
+    );
+  }
+}
+
 
 async function fund(ethAmount) {
   ethAmount = document.getElementById("ethAmount").value;
