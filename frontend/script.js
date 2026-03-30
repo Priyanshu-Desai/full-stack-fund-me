@@ -1,4 +1,5 @@
 import { ethers } from "./ethers-5.2.esm.min.js";
+import {abi, contractAddress} from "./constants.js";
 
 const connectButton = document.getElementById("connect");
 const fundButton = document.getElementById("fund");
@@ -24,10 +25,17 @@ async function connectMetaMask() {
 }
 
 async function fund(ethAmount) {
+  ethAmount = "0.01";
   console.log(`Funding with ${ethAmount} ETH...`);
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     console.log("Signer:", signer);
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const transactionResponse = await contract.fund({
+      value: ethers.utils.parseEther(ethAmount),
+    });
+    await listenForTransactionMine(transactionResponse, provider);
+    console.log("Funding complete!");
   }
 }
