@@ -25,7 +25,7 @@ async function connectMetaMask() {
 }
 
 async function fund(ethAmount) {
-  ethAmount = "0.01";
+  ethAmount = document.getElementById("ethAmount").value;
   console.log(`Funding with ${ethAmount} ETH...`);
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
